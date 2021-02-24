@@ -1,7 +1,7 @@
 $(function () {});
 
 //variables
-let today = moment().format("ddd,MMM Do");
+let today = moment().format("dddd,MMM Do");
 
 let now = moment().format("H A");
 
@@ -16,3 +16,13 @@ let planner = [
     {time: "4 PM", event: ""},
     {time: "5 PM", event: ""},
 ];
+
+// get localstorage
+let events = JSON.parse(localStorage.getItem("workDay"));
+
+if (events) {
+    planner = events;
+};
+
+//display current day and date
+$('#currentDay').text(today);
