@@ -1,11 +1,11 @@
 $(function () {} );
 
-	//variables
-var today = moment().format("dddd, MMMM Do");
+	//letiables
+let today = moment().format("dddd, MMMM Do");
 
-var now = moment().format("H A");
+let now = moment().format("H A");
 
-var planner = [
+let planner = [
 	{time: "9 AM", event: "" },
 	{time: "10 AM", event: "" },
 	{time: "11 AM", event: "" },
@@ -18,19 +18,19 @@ var planner = [
 ];
 
 	//get localstorage
-var events = JSON.parse(localStorage.getItem("workDay"));
+let events = JSON.parse(localStorage.getItem("workDay"));
 if (events) {
 	planner = events;
 }
 
-	//current date displayed
+	//current date displayed on top of page
 $("#currentDay").text(today);
 
 	//timeblock
 planner.forEach(function(timeBlock, index) {
-	var timeLabel = timeBlock.time
-	var blockColor = colorRow(timeLabel);
-	var row = 
+	let timeLabel = timeBlock.time
+	let blockColor = colorRow(timeLabel);
+	let row = 
 	'<div class="time-block" id="' + index + 
 	'"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
 	timeLabel + '</div><textarea class="form-control ' + blockColor + '">' + timeBlock.event +
@@ -39,13 +39,13 @@ planner.forEach(function(timeBlock, index) {
 	$(".container").append(row);
 });
 
-	//color time past, present, future 
+	//color coded for past, present, future 
 function colorRow(time) {
-	var planNow = moment(now, "H A");
-	var planEntry = moment(time, "H A");
-	if (planNow.isBefore(planEntry) === true) {
+	let currentPlan = moment(now, "H A");
+	let plannerEntry = moment(time, "H A");
+	if (currentPlan.isBefore(plannerEntry) === true) {
 		return "future";
-	} else if (planNow.isAfter(planEntry) === true) {
+	} else if (currentPlan.isAfter(plannerEntry) === true) {
 		return "past";
 	} else {
 		return "present";
@@ -54,12 +54,12 @@ function colorRow(time) {
 
 	//save 
 $(".saveBtn").on("click", function() {
-	var block = parseInt(
+	let block = parseInt(
 		$(this)
 		.closest(".time-block")
 		.attr("id")
 	);
-	var entry = $.trim(
+	let entry = $.trim(
 		$(this)
 		.parent()
 		.siblings("textarea")
