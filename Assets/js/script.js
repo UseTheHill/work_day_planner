@@ -26,3 +26,28 @@ if (events) {
 
 //display current day and date
 $('#currentDay').text(today);
+
+//timeblock
+planner.forEach(function(timeBlock, index) {
+    let timeLabel = timeBlock.time;
+    let blockColor = colorRow(timeLabel);
+    let row = '<div class="time-block" id="' + index + 
+	'"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
+	timeLabel + '</div><textarea class="form-control ' + blockColor + '">' + timeBlock.event +
+	'</textarea><div class="col-sm col-lg-1 input-group-append"><button type="button" class="saveBtn btn-block"><i class="fas fa-save"></i></button></div></div></div>';
+});
+
+$(".container").append(row);
+
+//color coded for past, present and future
+function colorRow(time) {
+    let planNow = moment(now, "H A");
+    let planEntry = moment(time, "H A");
+    if (planNow.isBefore(planEntry) === true) {
+        return "future";
+    } else if (planNow.isAfter(planEntry) === true) {
+        return "past";
+    } else {
+        return "present";
+    }
+};
