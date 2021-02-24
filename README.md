@@ -1,1 +1,14 @@
 # work_day_planner
+
+## Description:
+
+This is a simple calendar application that allows a user to save events for each hour of the workday.  When the user opens the planner then the current day is displayed at the top of the calendar.  When the user scrolls down then the user is presented with time blocks for standard business hours.  When the user views the timeblocks for that day they see the timeblocks are color coded to indicate whether it is in the past, present, or future.  When the user clicks on the timeblock they can enter an event and click the save button on that time block.  The text the user entered is saved and remains even if the page is refreshed.
+
+---
+
+## Deployed page: https://usethehill.github.io/work_day_planner/
+
+--- 
+
+## Demo of planner:
+![](assets/media/planner_demo.gif)
