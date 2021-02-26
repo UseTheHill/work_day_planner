@@ -1,7 +1,7 @@
 $(function () {} );
 
-	//letiables
-let today = moment().format("dddd, MMMM Do");
+	// variables
+let today = moment().format("dddd, MMMM D, YYYY");
 
 let now = moment().format("H A");
 
@@ -23,21 +23,8 @@ if (events) {
 	planner = events;
 }
 
-	//current date displayed on top of page
+	//current date on top of page
 $("#currentDay").text(today);
-
-	//timeblock
-planner.forEach(function(timeBlock, index) {
-	let timeLabel = timeBlock.time
-	let blockColor = colorRow(timeLabel);
-	let row = 
-	'<div class="time-block" id="' + index + 
-	'"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
-	timeLabel + '</div><textarea class="form-control ' + blockColor + '">' + timeBlock.event +
-	'</textarea><div class="col-sm col-lg-1 input-group-append"><button type="button" class="saveBtn btn-block"><i class="fas fa-save"></i></button></div></div></div>';
-
-	$(".container").append(row);
-});
 
 	//color coded for past, present, future 
 function colorRow(time) {
@@ -52,19 +39,26 @@ function colorRow(time) {
 	}
 }
 
+	//timeblock
+planner.forEach(function(timeBlock, index) {
+	let timeLabel = timeBlock.time
+	let blockColor = colorRow(timeLabel);
+	let row = 
+	'<div class="time-block" id="' + index + 
+	'"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
+	timeLabel + '</div><textarea class="form-control ' + blockColor + '">' + timeBlock.event +
+	'</textarea><div class="col-sm col-lg-1 input-group-append"><button type="button" class="saveBtn btn-block"><i class="fas fa-save"></i></button></div></div></div>';
 
-	//save 
+	$(".container").append(row);
+});
+
+	//save button
 $(".saveBtn").on("click", function() {
 	let block = parseInt(
-		$(this)
-		.closest(".time-block")
-		.attr("id")
+		$(this).closest(".time-block").attr("id")
 	);
 	let entry = $.trim(
-		$(this)
-		.parent()
-		.siblings("textarea")
-		.val()
+		$(this).parent().siblings("textarea").val()
 	);
 	planner[block].event = entry
 	
